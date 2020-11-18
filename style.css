@@ -1,0 +1,174 @@
+html {
+  font-size: 10px;
+  background-color: #faaca8;
+  background-image: linear-gradient(19deg, #faaca8 0%, #ddd6f3 100%);
+}
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  min-height: 100vh;
+}
+button {
+  width: 100%;
+  background-color: white;
+  border: none;
+  height: 6rem;
+  font-size: 1.7rem;
+  border-radius: 30px;
+  font-family: ubuntu, sans-serif;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#head > button,
+#subhead > button,
+#op-body > button {
+  font-size: 2rem;
+}
+.glow {
+  display: grid;
+  place-items: center;
+  height: 6rem;
+  width: 6rem;
+  border-radius: 50%;
+}
+button:hover > .glow {
+  animation: glow 2s ease-in-out infinite alternate-reverse;
+  z-index: 99;
+}
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 1px 1px #faaca8, 0 0 15px 3px #faaca8;
+  }
+  85% {
+    box-shadow: 0 0 1px 1px #fbda61, 0 0 15px 3px #fbda61;
+  }
+  100% {
+    box-shadow: none;
+  }
+}
+#equal > div {
+  background: tomato;
+  height: 6rem;
+  width: 6rem;
+  border-radius: 50%;
+  line-height: 6rem;
+}
+#equal:hover > div {
+  animation: pulse 1s ease-in-out infinite alternate-reverse;
+}
+@keyframes pulse {
+  0% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+#backspace:hover {
+  animation: color-change 1.5s ease-in-out infinite alternate-reverse;
+}
+@keyframes color-change {
+  0% {
+    color: #faaca8;
+  }
+  100% {
+    color: #fbda61;
+  }
+}
+#paper {
+  width: 50%;
+  background: white;
+  min-height: 80vh;
+}
+#calculator {
+  min-width: 325px;
+  max-width: 462px;
+  width: 50%;
+  background: white;
+  border-radius: 0 0 30px 30px;
+}
+#display {
+  width: 78%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  height: 15rem;
+  letter-spacing: 0.2rem;
+  font-family: "Source sans pro", sans-serif;
+  background-color: #ffffff;
+  color: rgb(34, 34, 34);
+  box-sizing: border-box;
+  text-align: right;
+  border-bottom: 1px solid rgb(238, 238, 238);
+}
+#display-main {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  height: 70%;
+  font-size: 3rem;
+}
+#display-secondary {
+  padding-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 40%;
+  font-size: 1.5rem;
+  color: rgba(34, 34, 34, 0.5);
+}
+#calculator-body {
+  padding-top: 15px;
+  height: auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  grid-template-areas:
+    "head head head op"
+    "subhead subhead subhead op"
+    "num num num op"
+    "num num num op"
+    "num num num equal"
+    "zero zero dec equal";
+}
+#head {
+  grid-area: head;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+#subhead {
+  grid-area: subhead;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+#num-body {
+  grid-area: num;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+}
+#op-body {
+  grid-area: op;
+  display: flex;
+  flex-direction: column;
+}
+#equal {
+  color: white;
+  font-weight: bold;
+  font-size: 2rem;
+  grid-area: equal;
+  height: 100%;
+}
+
+#zero {
+  grid-area: zero;
+}
+#dec {
+  grid-area: dec;
+}

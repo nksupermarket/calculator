@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&family=Source+Sans+Pro:ital@0;1&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/92c06801db.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <!-- <div id="paper">a</div> -->
+    <div id="calculator">
+      <div id="display">
+        <div id="display-secondary"></div>
+        <div id="display-main"></div>
+      </div>
+      <div id="calculator-body">
+        <div id="num-body">
+          <button type="button" class="num" id="9" value="9">
+            <div class="glow">9</div>
+          </button>
+          <button type="button" class="num" id="8" value="8">
+            <div class="glow">8</div>
+          </button>
+          <button type="button" class="num" id="7" value="7">
+            <div class="glow">7</div>
+          </button>
+          <button type="button" class="num" id="6" value="6">
+            <div class="glow">6</div>
+          </button>
+          <button type="button" class="num" id="5" value="5">
+            <div class="glow">5</div>
+          </button>
+          <button type="button" class="num" id="4" value="4">
+            <div class="glow">4</div>
+          </button>
+          <button type="button" class="num" id="3" value="3">
+            <div class="glow">3</div>
+          </button>
+          <button type="button" class="num" id="2" value="2">
+            <div class="glow">2</div>
+          </button>
+          <button type="button" class="num" id="1" value="1">
+            <div class="glow">1</div>
+          </button>
+        </div>
+        <button type="button" id="zero" class="num" value="0">
+          <div class="glow">0</div>
+        </button>
+        <button type="button" id="dec" value=".">
+          <div class="glow">.</div>
+        </button>
+        <div id="op-body">
+          <button type="button" id="backspace">
+            <i class="far fa-arrow-alt-circle-left"></i>
+          </button>
+          <button type="button" class="operator" id="multiply" value="*">
+            <div class="glow">x</div>
+          </button>
+          <button type="button" class="operator" id="subtract" value="-">
+            <div class="glow">-</div>
+          </button>
+          <button type="button" class="operator" id="add" value="+">
+            <div class="glow">+</div>
+          </button>
+        </div>
+        <button type="button" id="equal"><div>=</div></button>
+        <div id="subhead">
+          <button type="button" class="operator" value="^">
+            <div class="glow">^</div>
+          </button>
+          <button type="button" id="pos-neg"><div class="glow">±</div></button>
+          <button type="button" class="operator" id="divide" value="/">
+            <div class="glow">÷</div>
+          </button>
+        </div>
+        <div id="head">
+          <button type="button" id="ce"><div class="glow">CE</div></button>
+          <button type="button" id="clear"><div class="glow">C</div></button>
+          <button type="button" id="percentage">
+            <div class="glow">%</div>
+          </button>
+        </div>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
