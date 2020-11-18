@@ -11,7 +11,11 @@ function multiply(a, b) {
 }
 
 function divide(a, b) {
-  return +a / +b;
+  if (b === "0") {
+    alert("That one makes my head hurt. Gimme another one.");
+  } else {
+    return +a / +b;
+  }
 }
 
 function exponent(a, b) {
@@ -37,6 +41,7 @@ let secondNum;
 let answer;
 let operator;
 let onSecondNum = false;
+let onFirstNum = false;
 const nums = document.querySelectorAll(".num");
 const display = document.querySelector("#display-main");
 const displaySecond = document.querySelector("#display-secondary");
@@ -48,18 +53,25 @@ nums.forEach((num) =>
   })
 );
 function onNumberPress() {
-  if (answer) {
+  if (!firstNum && onFirstNum === false) {
     resetDisplay();
+    onFirstNum = true;
   }
   if (display.textContent === "0") display.textContent = "";
   if (firstNum && onSecondNum == false) {
-    onSecondNum = true;
-    display.textContent = "";
-    textBlink();
+    ontoSecondNumber();
+  }
+  if (firstNum && firstNum === answer) {
+    displayExp();
   }
 }
+function ontoSecondNumber() {
+  onFirstNum = false;
+  onSecondNum = true;
+  display.textContent = "";
+  textBlink();
+}
 function resetDisplay() {
-  answer = "";
   display.textContent = "";
   displaySecond.textContent = "";
 }
@@ -67,17 +79,25 @@ function resetDisplay() {
 const operators = document.querySelectorAll(".operator");
 operators.forEach((btn) =>
   btn.addEventListener("click", () => {
-    firstNum = display.textContent;
-    if (firstNum) operator = btn.value;
+    if (!operator) operator = btn.value;
     onOperatorPress();
+    if (answer) operator = btn.value;
+    //answer exists because a second operation was activated while the calculator only evaluates one operation at a time
+    displayExp();
   })
 );
 function onOperatorPress() {
+  textBlink();
+  if (!firstNum) {
+    firstNum = display.textContent;
+  }
   if (operator && onSecondNum) evaluate();
-  if (firstNum) {
-    answer = "";
+}
+function displayExp() {
+  if (!secondNum) {
     displaySecond.textContent = `${firstNum} ${operator}`;
-    textBlink();
+  } else if (firstNum) {
+    displaySecond.textContent = `${firstNum} ${operator} ${secondNum}`;
   }
 }
 function textBlink() {
@@ -86,40 +106,71 @@ function textBlink() {
 }
 
 const decimal = document.querySelector("#dec");
-decimal.addEventListener("click", () => {
-  if (display.textContent.indexOf(".") === -1) display.textContent += ".";
-});
+decimal.addEventListener("click", onDecimal);
+function onDecimal() {
+  if (!display.textContent) {
+    onFirstNum = true;
+    return (display.textContent = "0.");
+  }
+  if (firstNum && operator && onSecondNum === false) {
+    ontoSecondNumber();
+    return (display.textContent = "0.");
+  }
+  if (display.textContent.indexOf(".") === -1) {
+    display.textContent += ".";
+    appendAnswer();
+  }
+}
+function appendAnswer() {
+  if (onFirstNum === false) onFirstNum = true;
+  //checking if number on screen is result of an evaluation. Appends number then refreshes displaySecond
+  if (operator && onSecondNum === false) {
+    firstNum = display.textContent;
+    displayExp();
+  }
+  if (!display.textContent && onSecondNum === false) {
+    operator = "";
+    displayExp();
+  }
+}
 
 const percent = document.querySelector("#percentage");
-percent.addEventListener(
-  "click",
-  () => (display.textContent = +display.textContent * 0.01)
-);
+percent.addEventListener("click", () => {
+  if (!display.textContent) return;
+  display.textContent = display.textContent / 100;
+  appendAnswer();
+});
 
 const absolute = document.querySelector("#pos-neg");
 absolute.addEventListener("click", () => {
   +display.textContent < 0
     ? (display.textContent = Math.abs(display.textContent))
     : (display.textContent = -Math.abs(display.textContent));
+  appendAnswer();
 });
 
 const equals = document.querySelector("#equal");
 equals.addEventListener("click", () => {
-  if (answer || !operator) return;
+  if (!operator) return;
   evaluate();
-});
-
-function evaluate() {
-  secondNum = display.textContent;
-  displaySecond.textContent = `${firstNum} ${operator} ${secondNum}`;
-  answer = operate(firstNum, secondNum);
-  display.textContent = answer;
   reset();
-}
+});
 function reset() {
   firstNum = "";
-  secondNum = "";
   operator = "";
+  answer = "";
+}
+function evaluate() {
+  secondNum = display.textContent;
+  displayExp();
+  answer = operate(firstNum, secondNum);
+  display.textContent = answer;
+  firstNum = answer;
+  resetSoft();
+}
+
+function resetSoft() {
+  secondNum = "";
   onSecondNum = false;
 }
 
@@ -127,18 +178,22 @@ const backspace = document.querySelector("#backspace");
 backspace.addEventListener("click", deleter);
 function deleter() {
   display.textContent = display.textContent.slice(0, -1);
+  appendAnswer();
 }
 const clear = document.querySelector("#clear");
 clear.addEventListener("click", () => (display.textContent = ""));
 
 const ce = document.querySelector("#ce");
 ce.addEventListener("click", () => {
+  resetSoft();
   reset();
   resetDisplay();
 });
 
 window.addEventListener("keydown", (e) => {
-  console.log(e);
+  const key = document.querySelector(`button[value="${e.key}"]`);
+  key.classList.add("active");
+
   if (Number.isInteger(+e.key)) {
     onNumberPress();
     display.textContent += e.key;
@@ -149,15 +204,25 @@ window.addEventListener("keydown", (e) => {
     e.key === "-" ||
     e.key === "^"
   ) {
-    firstNum = display.textContent;
-    if (firstNum) operator = e.key;
+    if (!operator) operator = e.key;
     onOperatorPress();
+    if (answer) operator = e.key;
+    displayExp();
   } else if (e.key === "=" || e.key === "Enter") {
-    if (answer || !operator) return;
+    if (!operator) return;
     evaluate();
+    reset();
   } else if (e.key === "Backspace") {
     deleter();
   } else if (e.key === ".") {
-    if (display.textContent.indexOf(".") === -1) display.textContent += ".";
+    if (Math.floor(display.textContent) == display.textContent) {
+      display.textContent += ".";
+      appendAnswer();
+    }
   }
+});
+
+window.addEventListener("keyup", (e) => {
+  const key = document.querySelector(`button[value="${e.key}"]`);
+  key.classList.remove("active");
 });

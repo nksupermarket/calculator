@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
     <link
-      href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&family=Source+Sans+Pro:ital@0;1&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&family=Ubuntu+Mono&display=swap"
       rel="stylesheet"
     />
     <script
@@ -20,8 +20,8 @@
         <div id="display-secondary"></div>
         <div id="display-main"></div>
       </div>
-      <div id="calculator-body">
-        <div id="num-body">
+      <div id="calculator-body" class="grid-gap">
+        <div id="num-body" class="grid-gap">
           <button type="button" class="num" id="9" value="9">
             <div class="glow">9</div>
           </button>
@@ -56,9 +56,9 @@
         <button type="button" id="dec" value=".">
           <div class="glow">.</div>
         </button>
-        <div id="op-body">
-          <button type="button" id="backspace">
-            <i class="far fa-arrow-alt-circle-left"></i>
+        <div id="op-body" class="grid-gap">
+          <button type="button" id="backspace" value="Backspace">
+            <i class="far fa-arrow-alt-circle-left glow"></i>
           </button>
           <button type="button" class="operator" id="multiply" value="*">
             <div class="glow">x</div>
@@ -70,8 +70,10 @@
             <div class="glow">+</div>
           </button>
         </div>
-        <button type="button" id="equal"><div>=</div></button>
-        <div id="subhead">
+        <button type="button" id="equal" value="Enter">
+          <div>=</div>
+        </button>
+        <div id="subhead" class="grid-gap">
           <button type="button" class="operator" value="^">
             <div class="glow">^</div>
           </button>
@@ -80,7 +82,7 @@
             <div class="glow">÷</div>
           </button>
         </div>
-        <div id="head">
+        <div id="head" class="grid-gap">
           <button type="button" id="ce"><div class="glow">CE</div></button>
           <button type="button" id="clear"><div class="glow">C</div></button>
           <button type="button" id="percentage">
