@@ -39,6 +39,7 @@ body {
   flex-direction: column;
   min-height: 100vh;
 }
+/* button styling */
 button {
   width: 100%;
   background-color: var(--button-color);
@@ -55,10 +56,26 @@ button {
   justify-content: center;
   align-items: center;
 }
-#head > button,
-#subhead > button,
-#op-body > button {
+.head > button,
+.subhead > button,
+.op-body > button {
   font-size: 2rem;
+}
+#divide {
+  font-size: 2.2rem;
+}
+#subtract {
+  font-size: 2.7rem;
+}
+.subhead button,
+.op-body button {
+  color: var(--gradient-beginning);
+}
+button.deleter {
+  color: #6cadfd;
+}
+#pos-neg {
+  color: var(--button-font);
 }
 button:hover {
   box-shadow: 1px 1px 5px 0 var(--button-shadow),
@@ -118,7 +135,7 @@ button:hover > .glow {
   flex-direction: column;
   height: 15rem;
   font-family: "ubuntu mono", sans-serif;
-  background-color: var(--primary-color);
+  background-color: var(--button-color);
   box-shadow: inset 8px 8px 8px 0 var(--calculator-shadow),
     inset -4px -4px 5px 0 var(--calculator-shadow);
   box-sizing: border-box;
@@ -165,23 +182,23 @@ button:hover > .glow {
     "num num num equal"
     "zero zero dec equal";
 }
-#head {
+.head {
   grid-area: head;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
 }
-#subhead {
+.subhead {
   grid-area: subhead;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
 }
-#num-body {
+.num-body {
   grid-area: num;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
 }
-#op-body {
+.op-body {
   grid-area: op;
   display: flex;
   flex-direction: column;

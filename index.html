@@ -21,7 +21,7 @@
         <div id="display-main"></div>
       </div>
       <div id="calculator-body" class="grid-gap">
-        <div id="num-body" class="grid-gap">
+        <div class="num-body grid-gap">
           <button type="button" class="num" id="9" value="9">
             <div class="glow">9</div>
           </button>
@@ -56,8 +56,13 @@
         <button type="button" id="dec" value=".">
           <div class="glow">.</div>
         </button>
-        <div id="op-body" class="grid-gap">
-          <button type="button" id="backspace" value="Backspace">
+        <div class="op-body grid-gap">
+          <button
+            type="button"
+            id="backspace"
+            value="Backspace"
+            class="deleter"
+          >
             <i class="far fa-arrow-alt-circle-left glow"></i>
           </button>
           <button type="button" class="operator" id="multiply" value="*">
@@ -73,18 +78,22 @@
         <button type="button" id="equal" value="Enter">
           <div>=</div>
         </button>
-        <div id="subhead" class="grid-gap">
+        <div class="subhead grid-gap">
+          <button type="button" id="pos-neg"><div class="glow">±</div></button>
           <button type="button" class="operator" value="^">
             <div class="glow">^</div>
           </button>
-          <button type="button" id="pos-neg"><div class="glow">±</div></button>
           <button type="button" class="operator" id="divide" value="/">
             <div class="glow">÷</div>
           </button>
         </div>
-        <div id="head" class="grid-gap">
-          <button type="button" id="ce"><div class="glow">CE</div></button>
-          <button type="button" id="clear"><div class="glow">C</div></button>
+        <div class="head grid-gap">
+          <button type="button" id="ce" class="deleter">
+            <div class="glow">CE</div>
+          </button>
+          <button type="button" id="clear" class="deleter">
+            <div class="glow">C</div>
+          </button>
           <button type="button" id="percentage">
             <div class="glow">%</div>
           </button>
