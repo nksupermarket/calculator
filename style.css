@@ -1,26 +1,32 @@
+:root {
+  --primary-color: rgb(250, 250, 250);
+  --button-font: rgba(0, 0, 0, 0.5);
+  --button-shadow: rgba(0, 0, 0, 0.2);
+  --button-highlight: rgba(255, 255, 255, 1);
+  --display-main-font: rgba(0, 0, 0, 0.55);
+  --display-secondary-font: rgba(34, 34, 34, 0.5);
+  --calculator-highlight: rgba(255, 255, 255, 0.6);
+  --calculator-shadow: rgba(0, 0, 0, 0.1);
+  --display-highlight: rgba(230, 230, 230, 0.5);
+  --equal-gradient-beginning: #fd746c;
+  --equal-gradient-end: #fd746c;
+}
+[data-theme="dark"] {
+  --primary-color: #23262a;
+  --button-font: rgba(251, 251, 251, 0.5);
+  --button-shadow: rgba(0, 0, 0, 0.5);
+  --button-highlight: rgba(64, 64, 64, 0.5);
+  --display-main-font: rgba(251, 251, 251, 0.55);
+  --display-secondary-font: rgba(230, 230, 230, 0.5);
+  --calculator-highlight: rgba(64, 64, 64, 0.3);
+  --calculator-shadow: rgba(0, 0, 0, 0.6);
+  --display-highlight: rgba(64, 64, 64, 0.5);
+  --equal-gradient-beginning: #fd746c;
+  --equal-gradient-end: #fd746c;
+}
 html {
   font-size: 10px;
-  background: #ece9e6; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to right,
-    #ffffff,
-    #ece9e6
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to right,
-    #ffffff,
-    #ece9e6
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  background-image: linear-gradient(
-    109.6deg,
-    rgba(121, 203, 202, 1) 11.2%,
-    rgba(119, 161, 211, 1) 91.1%
-  );
-  background-image: radial-gradient(
-    circle farthest-corner at 10% 20%,
-    rgba(147, 230, 241, 1) 0%,
-    rgba(145, 192, 241, 1) 45.5%
-  );
+  background: var(--primary-color);
 }
 body {
   margin: 0;
@@ -33,16 +39,16 @@ body {
 }
 button {
   width: 100%;
-  background-color: rgb(250, 250, 250);
+  background-color: var(--primary-color);
   border: none;
   height: 6rem;
   font-size: 1.9rem;
-  color: rgba(0, 0, 0, 0.5);
+  color: var(--button-font);
   border-radius: 30px;
   font-family: ubuntu, sans-serif;
   cursor: pointer;
-  box-shadow: 4px 4px 3px 0 rgba(0, 0, 0, 0.2),
-    -4px -4px 5px 0 rgba(255, 255, 255, 0.7);
+  box-shadow: 4px 4px 3px 0 var(--button-shadow),
+    -4px -4px 5px 0 var(--button-highlight);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -54,8 +60,8 @@ button {
 }
 button.active,
 button:active {
-  box-shadow: 1px 1px 5px 0 rgba(0, 0, 0, 0.2),
-    -1px -1px 5px 0 rgba(255, 255, 255, 1);
+  box-shadow: 1px 1px 5px 0 var(--button-shadow),
+    -1px -1px 5px 0 var(--button-highlight);
 }
 .glow {
   transition: all 300ms ease-out;
@@ -63,7 +69,7 @@ button:active {
 #equal.active,
 #equal:hover {
   background-image: linear-gradient(135deg, #fd746c 0%, #ff9068 100%);
-  -webkit-text-fill-color: white;
+  -webkit-text-fill-color: var(--primary-color);
   -webkit-background-clip: border-box;
 }
 button.active,
@@ -80,17 +86,17 @@ button:hover > .glow {
 
 #paper {
   width: 50%;
-  background: white;
+  background: var(--primary-color);
   min-height: 80vh;
 }
 #calculator {
   min-width: 325px;
   max-width: 462px;
   width: 50%;
-  background: rgb(250, 250, 250);
+  background: var(--primary-color);
   border-radius: 10px 10px 30px 30px;
-  box-shadow: -5px -5px 9px 0 rgba(147, 230, 241, 0.5),
-    5px 5px 9px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: -30px -30px 30px 0 var(--calculator-highlight),
+    30px 30px 30px 0 var(--calculator-shadow);
 }
 #display {
   width: 90%;
@@ -99,11 +105,10 @@ button:hover > .glow {
   display: flex;
   flex-direction: column;
   height: 15rem;
-  letter-spacing: 0.2rem;
   font-family: "ubuntu mono", sans-serif;
-  background-color: rgb(250, 250, 250);
-  box-shadow: inset 4px 4px 5px 0 rgba(0, 0, 0, 0.1),
-    inset -2px -2px 3px 0 rgba(230, 230, 230, 0.5);
+  background-color: var(--primary-color);
+  box-shadow: inset 4px 4px 5px 0 var(--calculator-shadow),
+    inset -2px -2px 3px 0 var(--display-highlight);
   box-sizing: border-box;
   text-align: right;
   border: 1px solid rgb(238, 238, 238);
@@ -114,8 +119,10 @@ button:hover > .glow {
   justify-content: flex-end;
   height: 70%;
   font-size: 3rem;
-  color: rgba(0, 0, 0, 0.55);
+  color: var(--display-main-font);
   margin-right: 6%;
+  letter-spacing: 0.2rem;
+  overflow: hidden;
 }
 #display-secondary {
   padding-top: 10px;
@@ -123,9 +130,10 @@ button:hover > .glow {
   align-items: center;
   justify-content: flex-start;
   height: 40%;
-  font-size: 1.5rem;
-  color: rgba(34, 34, 34, 0.5);
+  font-size: 1.7rem;
+  color: var(--display-secondary-font);
   margin-left: 6%;
+  letter-spacing: 0.1rem;
 }
 .grid-gap {
   grid-gap: 10px 10px;
@@ -166,8 +174,9 @@ button:hover > .glow {
   flex-direction: column;
 }
 #equal {
+  border: 5px solid var(--primary-color);
   background-image: linear-gradient(315deg, #fd746c 0%, #ff9068 100%);
-  color: white;
+  color: var(--primary-color);
   font-weight: bold;
   font-size: 2rem;
   grid-area: equal;

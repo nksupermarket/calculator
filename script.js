@@ -49,7 +49,11 @@ const displaySecond = document.querySelector("#display-secondary");
 nums.forEach((num) =>
   num.addEventListener("click", () => {
     onNumberPress();
-    display.textContent += num.value;
+    if (display.textContent.length === 25) {
+      return;
+    } else {
+      display.textContent += num.value;
+    }
   })
 );
 function onNumberPress() {
@@ -94,9 +98,10 @@ function onOperatorPress() {
   if (operator && onSecondNum) evaluate();
 }
 function displayExp() {
+  if (!firstNum) return;
   if (!secondNum) {
     displaySecond.textContent = `${firstNum} ${operator}`;
-  } else if (firstNum) {
+  } else {
     displaySecond.textContent = `${firstNum} ${operator} ${secondNum}`;
   }
 }
@@ -192,11 +197,16 @@ ce.addEventListener("click", () => {
 
 window.addEventListener("keydown", (e) => {
   const key = document.querySelector(`button[value="${e.key}"]`);
+  if (!key) return;
   key.classList.add("active");
 
   if (Number.isInteger(+e.key)) {
     onNumberPress();
-    display.textContent += e.key;
+    if (display.textContent.length === 25) {
+      return;
+    } else {
+      display.textContent += e.key;
+    }
   } else if (
     e.key === "*" ||
     e.key === "/" ||
@@ -224,5 +234,6 @@ window.addEventListener("keydown", (e) => {
 
 window.addEventListener("keyup", (e) => {
   const key = document.querySelector(`button[value="${e.key}"]`);
+  if (!key) return;
   key.classList.remove("active");
 });
