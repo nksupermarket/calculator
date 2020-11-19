@@ -2,12 +2,11 @@
   /* --primary-color: rgb(250, 250, 250); */
   --primary-color: rgb(240, 241, 244);
   --display-color: rgb(235, 235, 235);
-  --button-font: rgba(0, 0, 0, 0.5);
+  --button-font: rgba(0, 0, 0, 0.6);
   --button-shadow: rgba(0, 0, 0, 0.3);
   --button-highlight: rgba(255, 255, 255, 0.7);
-  --display-main-font: rgba(0, 0, 0, 0.55);
-  --display-secondary-font: rgba(34, 34, 34, 0.5);
-  --calculator-body: rgba(246, 246, 246, 1);
+  --display-main-font: rgba(0, 0, 0, 0.637);
+  --display-secondary-font: rgba(34, 34, 34, 0.55);
   --calculator-highlight: rgba(255, 255, 255, 0.5);
   --calculator-shadow: rgba(0, 0, 0, 0.1);
   --display-highlight: rgba(230, 230, 230, 0.5);
@@ -16,13 +15,14 @@
 }
 :root[color-mode="dark"] {
   --primary-color: #23262a;
+  --display-color: rgba(87, 94, 104, 0.2);
   --button-font: rgba(251, 251, 251, 0.637);
   --button-shadow: rgba(0, 0, 0, 0.5);
   --button-highlight: rgba(64, 64, 64, 0.5);
   --display-main-font: rgba(251, 251, 251, 0.67);
   --display-secondary-font: rgba(230, 230, 230, 0.55);
-  --calculator-highlight: rgba(64, 64, 64, 0.3);
-  --calculator-shadow: rgba(0, 0, 0, 0.6);
+  --calculator-highlight: rgba(64, 64, 64, 0.25);
+  --calculator-shadow: rgba(0, 0, 0, 0.4);
   --display-highlight: rgba(64, 64, 64, 0.5);
   --gradient-beginning: #b63a31;
   --gradient-end: #f5632f;
@@ -48,7 +48,7 @@ body {
   font-weight: 700;
   font-family: montserrat, sans-serif;
   z-index: -1;
-  opacity: 0.2;
+  opacity: 0.1;
   bottom: 43%;
 }
 
@@ -173,7 +173,7 @@ button:hover > .glow {
   letter-spacing: 0.1rem;
 }
 .grid-gap {
-  grid-gap: 10px 10px;
+  grid-gap: 15px 15px;
 }
 #calculator-body {
   padding: 25px 25px;
