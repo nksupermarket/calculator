@@ -57,6 +57,7 @@ nums.forEach((num) =>
   })
 );
 function onNumberPress() {
+  //checks for recently evaluated answer in display
   if (!firstNum && onFirstNum === false) {
     resetDisplay();
     onFirstNum = true;
@@ -198,9 +199,12 @@ ce.addEventListener("click", () => {
 window.addEventListener("keydown", (e) => {
   const key = document.querySelector(`button[value="${e.key}"]`);
   if (!key) return;
-  const glow = key.querySelector(".glow");
   key.classList.add("active");
-  if (glow) glow.classList.add("active");
+
+  if (e.key != "=" && e.key != "Enter") {
+    const glow = key.querySelector(".glow");
+    if (glow) glow.classList.add("active");
+  }
 
   if (Number.isInteger(+e.key)) {
     onNumberPress();
@@ -240,4 +244,14 @@ window.addEventListener("keyup", (e) => {
   const glow = key.querySelector(".glow");
   key.classList.remove("active");
   glow.classList.remove("active");
+});
+
+const toggle = document.querySelector(".switch");
+
+toggle.addEventListener("input", (e) => {
+  const checked = e.target.checked;
+
+  checked
+    ? document.documentElement.setAttribute("color-mode", "dark")
+    : document.documentElement.setAttribute("color-mode", "light");
 });
