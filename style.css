@@ -8,10 +8,10 @@
   --calculator-highlight: rgba(255, 255, 255, 0.6);
   --calculator-shadow: rgba(0, 0, 0, 0.1);
   --display-highlight: rgba(230, 230, 230, 0.5);
-  --equal-gradient-beginning: #fd746c;
-  --equal-gradient-end: #fd746c;
+  --gradient-beginning: #fd746c;
+  --gradient-end: #ff9068;
 }
-[data-theme="dark"] {
+/* :root {
   --primary-color: #23262a;
   --button-font: rgba(251, 251, 251, 0.5);
   --button-shadow: rgba(0, 0, 0, 0.5);
@@ -21,9 +21,9 @@
   --calculator-highlight: rgba(64, 64, 64, 0.3);
   --calculator-shadow: rgba(0, 0, 0, 0.6);
   --display-highlight: rgba(64, 64, 64, 0.5);
-  --equal-gradient-beginning: #fd746c;
-  --equal-gradient-end: #fd746c;
-}
+  --gradient-beginning: #7c312c;
+  --gradient-end: #f5632f;
+} */
 html {
   font-size: 10px;
   background: var(--primary-color);
@@ -68,7 +68,11 @@ button:active {
 }
 #equal.active,
 #equal:hover {
-  background-image: linear-gradient(135deg, #fd746c 0%, #ff9068 100%);
+  background-image: linear-gradient(
+    135deg,
+    var(--gradient-beginning) 0%,
+    var(--gradient-end) 100%
+  );
   -webkit-text-fill-color: var(--primary-color);
   -webkit-background-clip: border-box;
 }
@@ -76,9 +80,8 @@ button.active,
 button:hover > .glow {
   background-image: linear-gradient(
     to right,
-    #ff5f6d 0%,
-    #ffc371 51%,
-    #ff5f6d 100%
+    var(--gradient-beginning) 0%,
+    var(--gradient-end) 51%
   );
   -webkit-text-fill-color: transparent;
   -webkit-background-clip: text;
@@ -111,7 +114,8 @@ button:hover > .glow {
     inset -2px -2px 3px 0 var(--display-highlight);
   box-sizing: border-box;
   text-align: right;
-  border: 1px solid rgb(238, 238, 238);
+  /*border: 1px solid rgb(238, 238, 238);*/
+  border: 1px solid var(--calculator-highlight);
 }
 #display-main {
   display: flex;
@@ -175,7 +179,11 @@ button:hover > .glow {
 }
 #equal {
   border: 5px solid var(--primary-color);
-  background-image: linear-gradient(315deg, #fd746c 0%, #ff9068 100%);
+  background-image: linear-gradient(
+    315deg,
+    var(--gradient-beginning) 0%,
+    var(--gradient-end) 100%
+  );
   color: var(--primary-color);
   font-weight: bold;
   font-size: 2rem;
