@@ -198,7 +198,9 @@ ce.addEventListener("click", () => {
 window.addEventListener("keydown", (e) => {
   const key = document.querySelector(`button[value="${e.key}"]`);
   if (!key) return;
+  const glow = key.querySelector(".glow");
   key.classList.add("active");
+  if (glow) glow.classList.add("active");
 
   if (Number.isInteger(+e.key)) {
     onNumberPress();
@@ -235,5 +237,7 @@ window.addEventListener("keydown", (e) => {
 window.addEventListener("keyup", (e) => {
   const key = document.querySelector(`button[value="${e.key}"]`);
   if (!key) return;
+  const glow = key.querySelector(".glow");
   key.classList.remove("active");
+  glow.classList.remove("active");
 });
