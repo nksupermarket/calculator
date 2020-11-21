@@ -57,7 +57,7 @@ nums.forEach((num) =>
   })
 );
 function onNumberPress() {
-  //checks for recently evaluated answer in display
+  //checks for recently evaluated answer in display and a completely empty display
   if (!firstNum && onFirstNum === false) {
     resetDisplay();
     onFirstNum = true;
@@ -66,6 +66,7 @@ function onNumberPress() {
   if (firstNum && onSecondNum == false) {
     ontoSecondNumber();
   }
+  //checking for an evaluation activated by operator press
   if (firstNum && firstNum === answer) {
     displayExp();
   }

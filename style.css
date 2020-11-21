@@ -3,6 +3,7 @@
   --primary-color: rgb(240, 241, 244);
   --display-color: rgb(235, 235, 235);
   --button-font: rgba(0, 0, 0, 0.6);
+  --deleter-font: #6cadfd;
   --button-shadow: rgba(0, 0, 0, 0.3);
   --button-highlight: rgba(255, 255, 255, 0.7);
   --display-main-font: rgba(0, 0, 0, 0.637);
@@ -16,6 +17,7 @@
 :root[color-mode="dark"] {
   --primary-color: #23262a;
   --display-color: rgba(87, 94, 104, 0.2);
+  --deleter-font: #316bb6;
   --button-font: rgba(251, 251, 251, 0.637);
   --button-shadow: rgba(0, 0, 0, 0.5);
   --button-highlight: rgba(64, 64, 64, 0.5);
@@ -85,7 +87,7 @@ button {
   color: var(--gradient-beginning);
 }
 button.deleter {
-  color: #6cadfd;
+  color: var(--deleter-font);
 }
 #pos-neg {
   color: var(--button-font);
@@ -169,7 +171,7 @@ button:hover > .glow {
   height: 40%;
   font-size: 1.7rem;
   color: var(--display-secondary-font);
-  margin-left: 6%;
+  margin: 0 6%;
   letter-spacing: 0.1rem;
 }
 .grid-gap {
@@ -281,4 +283,26 @@ input:checked {
     8px 4px 12px 0 var(--calculator-shadow),
     inset 4px 4px 4px 0 var(--calculator-shadow),
     inset -4px -4px 4px 0 var(--calculator-highlight);
+}
+
+@media screen and (max-width: 450px) {
+  .watermark {
+    display: none;
+  }
+
+  #calculator {
+    width: 100%;
+  }
+
+  #display {
+    width: 93%;
+  }
+
+  #equal {
+    border: 3px solid var(--primary-color);
+  }
+
+  input {
+    margin-bottom: 50px;
+  }
 }
