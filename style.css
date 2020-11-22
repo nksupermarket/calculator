@@ -69,8 +69,7 @@ body {
 .bigger-sym {
   font-size: 10rem;
 }
-#add-sym {
-}
+
 #minus-sym {
   margin-top: -5px;
 }
@@ -136,6 +135,27 @@ body {
   align-self: end;
   margin-bottom: 0;
   margin-top: 5px;
+}
+.note-animate {
+  position: relative;
+}
+.note-animate::after {
+  content: "";
+  position: absolute;
+  width: 1px;
+  margin-right: 2px;
+  height: 1.7rem;
+  border-right: 1px solid var(--button-font);
+  animation: blink 500ms ease infinite;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 .vert-bar {
   display: grid;

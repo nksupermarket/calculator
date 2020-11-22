@@ -12,7 +12,7 @@ function multiply(a, b) {
 
 function divide(a, b) {
   if (b === "0") {
-    alert("That one makes my head hurt. Gimme another one.");
+    return alert("That one makes my head hurt. Gimme another one.");
   } else {
     return +a / +b;
   }
@@ -60,21 +60,17 @@ nums.forEach((num) =>
 );
 
 function numberCheck() {
-  // if (!display.textContent && onFirstNum === true) {
-  //   resetDisplay();
-  // }
-
   if (display.textContent === "0") display.textContent = "";
 
   if (firstNum && onSecondNum == false) {
     ontoSecondNumber();
   }
 
-  if (evaluated === true) {
+  if (evaluated === true && onFirstNum === false) {
     resetDisplay();
     evaluated = false;
   }
-  //checking for an evaluation activated by operator press
+  //checking for an evaluation computted by operator press
   if (firstNum === answer) {
     displayExp();
   }
@@ -103,12 +99,11 @@ operators.forEach((btn) =>
 function onOperatorPress() {
   textBlink();
 
-  if (!firstNum) {
-    newEval();
-    function newEval() {
+  if (display.textContent && !firstNum) {
+    (function newEval() {
       firstNum = display.textContent;
       evaluated = false;
-    }
+    })();
   }
 
   if (operator && onSecondNum) {
@@ -134,7 +129,7 @@ const decimal = document.querySelector("#dec");
 decimal.addEventListener("click", onDecimal);
 
 function onDecimal() {
-  if (!display.textContent) {
+  if (!display.textContent && !firstNum) {
     onFirstNum = true;
     return (display.textContent = "0.");
   }
@@ -149,6 +144,9 @@ function onDecimal() {
   appendAnswer();
 }
 function appendAnswer() {
+  if (evaluated === true) {
+    onFirstNum = true;
+  }
   if (stillOperating === true) {
     onSecondNum = true;
   }
@@ -200,11 +198,32 @@ function appendNotepad() {
   const notepad = document.getElementById("notepad");
   const note = document.createElement("p");
 
-  note.classList.add("note");
+  note.classList.add("note", "note-animate");
 
-  note.textContent = `${firstNum} ${operator} ${secondNum} = ${answer}`;
-
+  type(note);
   notepad.appendChild(note);
+}
+
+function type(a) {
+  let index = 0;
+  let letter = "";
+  const arg = a;
+  const numFirst = firstNum;
+  const numSec = secondNum;
+  const op = operator;
+  const ans = answer;
+
+  (function animation() {
+    const str = `${numFirst} ${op} ${numSec} = ${ans}`;
+    letter = str.slice(0, index++);
+
+    arg.textContent = letter;
+    if (letter.length === str.length) {
+      setTimeout(() => arg.classList.remove("note-animate"), 2000);
+      return;
+    }
+    setTimeout(animation, 200);
+  })();
 }
 
 function resetSoft() {
