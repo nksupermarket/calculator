@@ -191,7 +191,7 @@ function evaluate() {
   secondNum = display.textContent;
   answer = operate(firstNum, secondNum);
   display.textContent = answer;
-  appendNotepad();
+  if (answer) appendNotepad();
   if (stillOperating === true) firstNum = answer;
   displayExp();
   resetSoft();
@@ -237,7 +237,9 @@ window.addEventListener("keydown", (e) => {
     const glow = key.querySelector(".glow");
     if (glow) glow.classList.add("active");
   }
+});
 
+window.addEventListener("keydown", (e) => {
   if (Number.isInteger(+e.key)) {
     numberCheck();
     if (display.textContent.length === 25) {

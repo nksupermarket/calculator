@@ -2,7 +2,7 @@
   /* --primary-color: rgb(250, 250, 250); */
   --primary-color: rgb(240, 241, 244);
   --display-color: rgb(235, 235, 235);
-  --button-font: rgba(0, 0, 0, 0.644);
+  --button-font: rgba(0, 0, 0, 0.568);
   --deleter-font: #6cadfd;
   --button-shadow: rgba(0, 0, 0, 0.3);
   --button-highlight: rgba(255, 255, 255, 0.7);
@@ -46,12 +46,39 @@ body {
 }
 .watermark {
   position: absolute;
-  font-size: 25rem;
   font-weight: 700;
   font-family: montserrat, sans-serif;
   z-index: -1;
-  opacity: 0.1;
   margin-top: -17rem;
+}
+.watermark h1 {
+  opacity: 0.1;
+  font-size: 25rem;
+}
+.symbol-ctn {
+  opacity: 0.05;
+  display: flex;
+  flex-direction: row;
+  font-size: 8rem;
+  margin-top: 130px;
+  margin-left: 795px;
+}
+.sym {
+  margin-right: 15px;
+}
+.bigger-sym {
+  font-size: 10rem;
+}
+#add-sym {
+}
+#minus-sym {
+  margin-top: -5px;
+}
+#multi-sym {
+  margin-top: 10px;
+}
+#div-sym {
+  margin-top: 15px;
 }
 .content {
   position: absolute;
@@ -61,6 +88,7 @@ body {
   margin-top: -11rem;
   height: 660px;
   width: 1290px;
+  pointer-events: none;
 }
 #col-1 {
   display: grid;
