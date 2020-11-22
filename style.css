@@ -387,6 +387,7 @@ input:checked {
 }
 
 @media screen and (max-width: 450px) {
+  .content,
   .watermark {
     display: none;
   }
