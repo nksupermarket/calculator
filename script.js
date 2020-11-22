@@ -41,14 +41,16 @@ let secondNum;
 let answer;
 let operator;
 let onSecondNum = false;
-let onFirstNum = false;
+let onFirstNum = true;
+let stillOperating = true;
+let evaluated = false;
 const nums = document.querySelectorAll(".num");
 const display = document.querySelector("#display-main");
 const displaySecond = document.querySelector("#display-secondary");
 
 nums.forEach((num) =>
   num.addEventListener("click", () => {
-    onNumberPress();
+    numberCheck();
     if (display.textContent.length === 25) {
       return;
     } else {
@@ -56,18 +58,24 @@ nums.forEach((num) =>
     }
   })
 );
-function onNumberPress() {
-  //checks for recently evaluated answer in display and a completely empty display
-  if (!firstNum && onFirstNum === false) {
-    resetDisplay();
-    onFirstNum = true;
-  }
+
+function numberCheck() {
+  // if (!display.textContent && onFirstNum === true) {
+  //   resetDisplay();
+  // }
+
   if (display.textContent === "0") display.textContent = "";
+
   if (firstNum && onSecondNum == false) {
     ontoSecondNumber();
   }
+
+  if (evaluated === true) {
+    resetDisplay();
+    evaluated = false;
+  }
   //checking for an evaluation activated by operator press
-  if (firstNum && firstNum === answer) {
+  if (firstNum === answer) {
     displayExp();
   }
 }
@@ -87,20 +95,30 @@ operators.forEach((btn) =>
   btn.addEventListener("click", () => {
     if (!operator) operator = btn.value;
     onOperatorPress();
-    if (answer) operator = btn.value;
-    //answer exists because a second operation was activated while the calculator only evaluates one operation at a time
+    if (stillOperating) operator = btn.value;
     displayExp();
   })
 );
+
 function onOperatorPress() {
   textBlink();
+
   if (!firstNum) {
-    firstNum = display.textContent;
+    newEval();
+    function newEval() {
+      firstNum = display.textContent;
+      evaluated = false;
+    }
   }
-  if (operator && onSecondNum) evaluate();
+
+  if (operator && onSecondNum) {
+    stillOperating = true;
+    evaluate();
+  }
 }
+
 function displayExp() {
-  if (!firstNum) return;
+  if (firstNum != "0" && !firstNum) return;
   if (!secondNum) {
     displaySecond.textContent = `${firstNum} ${operator}`;
   } else {
@@ -114,6 +132,7 @@ function textBlink() {
 
 const decimal = document.querySelector("#dec");
 decimal.addEventListener("click", onDecimal);
+
 function onDecimal() {
   if (!display.textContent) {
     onFirstNum = true;
@@ -125,19 +144,13 @@ function onDecimal() {
   }
   if (display.textContent.indexOf(".") === -1) {
     display.textContent += ".";
-    appendAnswer();
+    displayExp();
   }
+  appendAnswer();
 }
 function appendAnswer() {
-  if (onFirstNum === false) onFirstNum = true;
-  //checking if number on screen is result of an evaluation. Appends number then refreshes displaySecond
-  if (operator && onSecondNum === false) {
-    firstNum = display.textContent;
-    displayExp();
-  }
-  if (!display.textContent && onSecondNum === false) {
-    operator = "";
-    displayExp();
+  if (stillOperating === true) {
+    onSecondNum = true;
   }
 }
 
@@ -146,6 +159,7 @@ percent.addEventListener("click", () => {
   if (!display.textContent) return;
   display.textContent = display.textContent / 100;
   appendAnswer();
+  displayExp();
 });
 
 const absolute = document.querySelector("#pos-neg");
@@ -154,26 +168,43 @@ absolute.addEventListener("click", () => {
     ? (display.textContent = Math.abs(display.textContent))
     : (display.textContent = -Math.abs(display.textContent));
   appendAnswer();
+  displayExp();
 });
 
 const equals = document.querySelector("#equal");
-equals.addEventListener("click", () => {
-  if (!operator) return;
+equals.addEventListener("click", onEqual);
+function onEqual() {
+  if (!operator && secondNum) return;
+  stillOperating = false;
   evaluate();
+  evaluated = true;
   reset();
-});
+}
 function reset() {
   firstNum = "";
   operator = "";
   answer = "";
+  stillOperating = false;
+  onFirstNum = false;
 }
 function evaluate() {
   secondNum = display.textContent;
-  displayExp();
   answer = operate(firstNum, secondNum);
   display.textContent = answer;
-  firstNum = answer;
+  appendNotepad();
+  if (stillOperating === true) firstNum = answer;
+  displayExp();
   resetSoft();
+}
+function appendNotepad() {
+  const notepad = document.getElementById("notepad");
+  const note = document.createElement("p");
+
+  note.classList.add("note");
+
+  note.textContent = `${firstNum} ${operator} ${secondNum} = ${answer}`;
+
+  notepad.appendChild(note);
 }
 
 function resetSoft() {
@@ -185,7 +216,7 @@ const backspace = document.querySelector("#backspace");
 backspace.addEventListener("click", deleter);
 function deleter() {
   display.textContent = display.textContent.slice(0, -1);
-  appendAnswer();
+  displayExp();
 }
 const clear = document.querySelector("#clear");
 clear.addEventListener("click", () => (display.textContent = ""));
@@ -208,7 +239,7 @@ window.addEventListener("keydown", (e) => {
   }
 
   if (Number.isInteger(+e.key)) {
-    onNumberPress();
+    numberCheck();
     if (display.textContent.length === 25) {
       return;
     } else {
@@ -223,28 +254,32 @@ window.addEventListener("keydown", (e) => {
   ) {
     if (!operator) operator = e.key;
     onOperatorPress();
-    if (answer) operator = e.key;
+    if (stillOperating) operator = e.key;
     displayExp();
   } else if (e.key === "=" || e.key === "Enter") {
-    if (!operator) return;
-    evaluate();
-    reset();
+    onEqual();
   } else if (e.key === "Backspace") {
     deleter();
   } else if (e.key === ".") {
-    if (Math.floor(display.textContent) == display.textContent) {
-      display.textContent += ".";
-      appendAnswer();
-    }
+    onDecimal();
+  } else if (e.key === "c") {
+    display.textContent = "";
+  } else if (e.key === "e") {
+    resetSoft();
+    reset();
+    resetDisplay();
   }
 });
 
 window.addEventListener("keyup", (e) => {
   const key = document.querySelector(`button[value="${e.key}"]`);
   if (!key) return;
-  const glow = key.querySelector(".glow");
+
   key.classList.remove("active");
-  glow.classList.remove("active");
+  if (e.key != "=" && e.key != "Enter") {
+    const glow = key.querySelector(".glow");
+    glow.classList.remove("active");
+  }
 });
 
 const toggle = document.querySelector(".switch");

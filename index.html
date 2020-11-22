@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
     <link
-      href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&family=Ubuntu+Mono&family=Montserrat:wght@700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500&family=Ubuntu+Mono&family=Montserrat:wght@700&display=swap"
       rel="stylesheet"
     />
     <script
@@ -16,11 +16,47 @@
   <body>
     <div class="watermark">calculator</div>
     <!-- <div id="paper">a</div> -->
+    <div class="content">
+      <div id="col-1">
+        <div id="instructions">
+          <p>Keyboard support:</p>
+          <p>
+            <span class="keyboard-icon">1</span> -
+            <span class="keyboard-icon">9</span> to input numbers
+          </p>
+          <p>
+            <span class="keyboard-icon">+</span>
+            <span class="keyboard-icon">-</span>
+            <span class="keyboard-icon">*</span>
+            <span class="keyboard-icon">/</span>
+            <span class="keyboard-icon">^</span> to input operator
+          </p>
+          <p>
+            <span class="keyboard-icon" id="enter-key">Enter</span> or
+            <span class="keyboard-icon">=</span> to evaluate
+          </p>
+          <p>
+            <span class="keyboard-icon" id="back-key">backspace</span
+            ><span class="keyboard-icon">c</span
+            ><span class="keyboard-icon">e</span>to delete
+          </p>
+        </div>
+        <div id="notepad">
+          <p class="note">Notepad</p>
+        </div>
+      </div>
+
+      <div class="vert-bar">
+        <div id="top-bar"></div>
+        <div id="bot-bar"></div>
+      </div>
+    </div>
     <div id="calculator">
       <div id="display">
         <div id="display-secondary"></div>
         <div id="display-main"></div>
       </div>
+
       <div id="calculator-body" class="grid-gap">
         <div class="num-body grid-gap">
           <button type="button" class="num" id="9" value="9">
@@ -80,7 +116,9 @@
           <div>=</div>
         </button>
         <div class="subhead grid-gap">
-          <button type="button" id="pos-neg"><div class="glow">±</div></button>
+          <button type="button" id="pos-neg">
+            <div class="glow">±</div>
+          </button>
           <button type="button" class="operator" value="^">
             <div class="glow">^</div>
           </button>

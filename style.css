@@ -2,7 +2,7 @@
   /* --primary-color: rgb(250, 250, 250); */
   --primary-color: rgb(240, 241, 244);
   --display-color: rgb(235, 235, 235);
-  --button-font: rgba(0, 0, 0, 0.6);
+  --button-font: rgba(0, 0, 0, 0.644);
   --deleter-font: #6cadfd;
   --button-shadow: rgba(0, 0, 0, 0.3);
   --button-highlight: rgba(255, 255, 255, 0.7);
@@ -18,7 +18,7 @@
   --primary-color: #23262a;
   --display-color: rgba(87, 94, 104, 0.2);
   --deleter-font: #316bb6;
-  --button-font: rgba(251, 251, 251, 0.637);
+  --button-font: rgba(251, 251, 251, 0.692);
   --button-shadow: rgba(0, 0, 0, 0.5);
   --button-highlight: rgba(64, 64, 64, 0.5);
   --display-main-font: rgba(251, 251, 251, 0.67);
@@ -32,7 +32,7 @@
 html {
   font-size: 10px;
   background: var(--primary-color);
-  transition: all 800ms ease-out;
+  transition: all 800ms ease-in;
 }
 body {
   margin: 0;
@@ -51,15 +51,90 @@ body {
   font-family: montserrat, sans-serif;
   z-index: -1;
   opacity: 0.1;
-  bottom: 43%;
+  margin-top: -17rem;
 }
-
+.content {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: -11rem;
+  height: 660px;
+  width: 1290px;
+}
+#col-1 {
+  display: grid;
+  grid-template-areas:
+    "top"
+    "."
+    "bot";
+}
+#instructions {
+  grid-area: top;
+  font-size: 1.4rem;
+  font-family: ubuntu, sans-serif;
+  color: var(--button-font);
+}
+.keyboard-icon {
+  display: inline-block;
+  text-align: center;
+  line-height: 2rem;
+  height: 2rem;
+  min-width: 2rem;
+  margin-right: 10px;
+  background-color: var(--primary-color);
+  box-shadow: 4px 4px 4px 0 var(--calculator-shadow),
+    -4px -4px 4px 0 var(--calculator-highlight);
+}
+#back-key {
+  width: 90px;
+}
+#enter-key {
+  width: 50px;
+}
+#notepad {
+  grid-area: bot;
+  align-self: end;
+  display: grid;
+  font-family: "ubuntu mono", ubuntu, sans-serif;
+  font-size: 1.6rem;
+  color: var(--button-font);
+  height: 235px;
+  width: 400px;
+  overflow: hidden;
+  align-content: end;
+}
+.note {
+  align-self: end;
+  margin-bottom: 0;
+  margin-top: 5px;
+}
+.vert-bar {
+  display: grid;
+  grid-template-areas:
+    "top"
+    "."
+    "bot";
+  width: 100px;
+}
+#top-bar {
+  grid-area: top;
+  height: 220px;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+#bot-bar {
+  grid-area: bot;
+  align-self: end;
+  height: 235px;
+  background-color: rgba(0, 0, 0, 0.1);
+}
 /* button styling */
 button {
   width: 100%;
   background-color: var(--primary-color);
   border: none;
   height: 6rem;
+  font-weight: 500;
   font-size: 1.9rem;
   color: var(--button-font);
   border-radius: 30px;
@@ -113,8 +188,6 @@ button:active {
     var(--gradient-beginning) 0%,
     var(--gradient-end) 100%
   );
-  -webkit-text-fill-color: var(--primary-color);
-  -webkit-background-clip: border-box;
 }
 .glow.active,
 button:hover > .glow {
